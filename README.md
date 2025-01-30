@@ -1,2 +1,2 @@
-# repo2
-My clone repository
+# Coding solutions
+My repository for coding solutions
