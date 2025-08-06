@@ -1,0 +1,32 @@
+class Solution {
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        int flowerbedsize = flowerbed.length;
+        for(int i =0 ; i<flowerbedsize && n > 0 ; i++){
+            boolean prev = i==0 || flowerbed[i-1] ==0 ;
+            boolean fut = i ==flowerbedsize-1 || flowerbed[i+1] ==0;
+            if( prev && fut && flowerbed[i] == 0){
+                flowerbed[i] = 1;
+                n--;
+            }
+        }
+        return n <= 0 ;
+    }
+}
+
+
+Intuition
+The goal is to determine whether it's possible to plant a given number of flowers (denoted by n) in an existing flowerbed, subject to the constraint that no two flowers can be planted in adjacent plots. Initially, some plots in the flowerbed are already occupied by flowers (represented by 1), and others are empty (represented by 0). To solve this problem, the main idea is to check each position in the flowerbed to see if a flower can be planted there (i.e., the current plot and its adjacent plots are empty). If possible, we plant the flower and continue until either all required flowers are planted or we run out of space.
+
+Approach
+Iterate through the flowerbed:
+Traverse each index of the flowerbed.
+For each index, check whether both adjacent plots (left and right) are empty or whether the current plot is at the boundary (first or last index) and the adjacent plot is empty.
+Check and plant flowers:
+If the current plot is empty (flowerbed[i] == 0), and both adjacent plots are either empty or out of bounds (i.e., the current plot is at the edges), plant a flower by setting flowerbed[i] = 1.
+After planting a flower, decrement the count of remaining flowers (n--).
+Return result:
+If n <= 0, it means all the flowers have been successfully planted, and we return true.
+If we finish the loop without planting enough flowers, return false.
+Complexity
+Time complexity: O(n)
+Space complexity: O(1)
